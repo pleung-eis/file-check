@@ -101,7 +101,7 @@ function run() {
             // Check in parallel
             yield Promise.all(fileList.map((file) => __awaiter(this, void 0, void 0, function* () {
                 const isPresent = yield checkExistence(file);
-                if (isPresent) && fileList.includes(path.extname(file)) {
+                if (isPresent && fileList.includes(path.extname(file))) {
                     missingFiles.push(file);
                 }
             })));
