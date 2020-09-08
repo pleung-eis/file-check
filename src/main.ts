@@ -28,6 +28,10 @@ async function run(): Promise<void> {
     await Promise.all(
       fileList.map(async (file: string) => {
         const isPresent = await checkExistence(file)
+        core.info(`File: ${file}`);
+        core.info(`IsPresent: ${isPresent}`);
+        core.info(`Filetype: ${path.extname(file)}`);
+        core.info(`Include: ${fileList.includes(path.extname(file))}`);	
         if (isPresent && fileList.includes(path.extname(file))) {
           missingFiles.push(file)
         }
