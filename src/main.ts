@@ -22,7 +22,10 @@ async function run(): Promise<void> {
 //    const restrictlist: string[] = searchFiles
 //      .split(',')
 //      .map((item: string) => item.trim())
-    const commitList = commitFiles.map((item) => item.trim());
+    const commitList = commitFiles
+        .replace(/[\[\]']+/gi, '')
+        .split(','
+        .map((item) => item.trim());
     const missingFiles: string[] = []
     const path = require('path')
 
