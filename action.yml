@@ -11,6 +11,9 @@ inputs:
     description: 'Makes the Action fail on missing files.'
     default: true
     required: false
+  commitFiles:
+    description: 'List of updated files'
+    required: false
 outputs:
   files_exists:
     description: 'Wheter the file(s) exists or not.'
