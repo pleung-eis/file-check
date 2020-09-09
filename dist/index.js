@@ -92,10 +92,12 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const files = core.getInput('files', { required: true });
+	    const commitFiles = core.getInput('commitFiles', { required: true });
             const failure = (core.getInput('allow_failure') || 'false').toUpperCase() === 'TRUE';
             const fileList = files
                 .split(',')
                 .map((item) => item.trim());
+            const commitList = commitFiles.map((item) => item.trim());
             const missingFiles = [];
 	    const path = require('path')
             // Check in parallel

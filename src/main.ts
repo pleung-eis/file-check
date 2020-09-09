@@ -13,6 +13,7 @@ async function checkExistence(path: string): Promise<boolean> {
 async function run(): Promise<void> {
   try {
     const files: string = core.getInput('files', {required: true})
+    const commitFiles = core.getInput('commitFiles', { required: true });
     const failure: boolean =
       (core.getInput('allow_failure') || 'false').toUpperCase() === 'TRUE'
     const fileList: string[] = files
@@ -21,6 +22,7 @@ async function run(): Promise<void> {
 //    const restrictlist: string[] = searchFiles
 //      .split(',')
 //      .map((item: string) => item.trim())
+    const commitList = commitFiles.map((item) => item.trim());
     const missingFiles: string[] = []
     const path = require('path')
 
