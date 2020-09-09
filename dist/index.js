@@ -99,7 +99,7 @@ function run() {
                 .map((item) => item.trim());
             const commitList = commitFiles
                 .replace(/[\[\]']+/gi, '')
-	        .split(',')
+                .split(',')
                 .map((item) => item.trim());
             const missingFiles = [];
 	    const path = require('path')
