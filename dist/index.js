@@ -106,13 +106,14 @@ function run() {
             // Check in parallel
             yield Promise.all(commitList.map((file) => __awaiter(this, void 0, void 0, function* () {
                 const isPresent = yield checkExistence(path.basename(file));
-		core.info(`File: ${file}`);
-                core.info(`Filename: ${path.basename(file)}`);
+		const regexFile = file.replace(/\"+/gi, '');
+		core.info(`File: ${regexFile}`);
+                core.info(`Filename: ${path.basename(regexFile)}`);
 		core.info(`IsPresent: ${isPresent}`);
-		core.info(`Filetype: ${path.extname(file)}`);
-		core.info(`Include: ${fileList.includes(path.extname(file))}`);
-                if (fileList.includes(path.extname(file))) {
-                    missingFiles.push(file);
+		core.info(`Filetype: ${path.extname(regexFile)}`);
+		core.info(`Include: ${fileList.includes(path.extname(regexFile))}`);
+                if (fileList.includes(path.extname(regexFile))) {
+                    missingFiles.push(regexFile);
                 }
             })));
             if (missingFiles.length > 0) {
