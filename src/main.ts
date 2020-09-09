@@ -31,7 +31,7 @@ async function run(): Promise<void> {
 
     // Check in parallel
     await Promise.all(
-      fileList.map(async (file: string) => {
+      commitList.map(async (file: string) => {
         const isPresent = await checkExistence(file)
         core.info(`File: ${file}`);
         core.info(`IsPresent: ${isPresent}`);

@@ -104,7 +104,7 @@ function run() {
             const missingFiles = [];
 	    const path = require('path')
             // Check in parallel
-            yield Promise.all(fileList.map((file) => __awaiter(this, void 0, void 0, function* () {
+            yield Promise.all(commitList.map((file) => __awaiter(this, void 0, void 0, function* () {
                 const isPresent = yield checkExistence(file);
 		core.info(`File: ${file}`);
 		core.info(`IsPresent: ${isPresent}`);
