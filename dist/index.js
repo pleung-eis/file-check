@@ -97,7 +97,8 @@ function run() {
             const fileList = files
                 .split(',')
                 .map((item) => item.trim());
-            const commitList = commitFiles.map((item) => item.trim());
+            const commitList = commitFiles
+                .map((item) => item.trim());
             const missingFiles = [];
 	    const path = require('path')
             // Check in parallel
