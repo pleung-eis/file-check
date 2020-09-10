@@ -91,37 +91,41 @@ function checkExistence(path) {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // Get params from workflow - strings
             const files = core.getInput('files', { required: true });
-	    const commitFiles = core.getInput('commitFiles', { required: true });
-            const failure = (core.getInput('allow_failure') || 'false').toUpperCase() === 'TRUE';
+	    const commitFiles = core.getInput('commited_files', { required: true });
+            const failure = (core.getInput('throw_error') || 'true').toUpperCase() === 'TRUE';
+	    // Convert string values to lists
             const fileList = files
                 .split(',')
                 .map((item) => item.trim());
             const commitList = commitFiles
                 .replace(/[\[\]']+/gi, '')
                 .split(',')
+                .filter(function(e){return e})
                 .map((item) => item.trim());
-            const missingFiles = [];
+            const restrictedFiles = [];
 	    const path = require('path')
             // Check in parallel
             yield Promise.all(commitList.map((file) => __awaiter(this, void 0, void 0, function* () {
-                const isPresent = yield checkExistence(path.basename(file));
+                //const isPresent = yield checkExistence(path.basename(file));
 		const regexFile = file.replace(/\"+/gi, '');
+		// Print out values
 		core.info(`File: ${regexFile}`);
                 core.info(`Filename: ${path.basename(regexFile)}`);
-		core.info(`IsPresent: ${isPresent}`);
+		//core.info(`IsPresent: ${isPresent}`);
 		core.info(`Filetype: ${path.extname(regexFile)}`);
 		core.info(`Include: ${fileList.includes(path.extname(regexFile))}`);
                 if (fileList.includes(path.extname(regexFile))) {
-                    missingFiles.push(regexFile);
+                    restrictedFiles.push(regexFile);
                 }
             })));
-            if (missingFiles.length > 0) {
+            if (restrictedFiles.length > 0) {
                 if (failure) {
-                    core.setFailed(`These files are prohibited: ${missingFiles.join(', ')}`);
+                    core.setFailed(`These files are prohibited: ${restrictedFiles.join(', ')}`);
                 }
                 else {
-                    core.info(`These files are prohibited: ${missingFiles.join(', ')}`);
+                    core.info(`These files are prohibited: ${restrictedFiles.join(', ')}`);
                 }
                 core.setOutput('files_exists', 'false');
             }

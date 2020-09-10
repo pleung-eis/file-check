@@ -1,22 +1,22 @@
-name: 'File Type Existence'
-description: 'GitHub Action to check for file existence'
+name: 'File Type Restriction'
+description: 'GitHub Action to restrict specific file types'
 branding:
   icon: 'file-text'  
   color: 'green'
 inputs:
   files:
-    description: 'Comma separated string with paths to files and directories to check for existence.'
+    description: 'Comma separated restricted file types.'
     required: true
-  allow_failure:
-    description: 'Makes the Action fail on missing files.'
+  throw_error:
+    description: 'Makes the Action fail on restricted files.'
     default: true
     required: false
-  commitFiles:
+  committed_files:
     description: 'List of updated files'
-    required: false
+    required: true
 outputs:
   files_exists:
-    description: 'Wheter the file(s) exists or not.'
+    description: 'Whether the restricted file(s) exists.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
