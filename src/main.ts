@@ -49,10 +49,10 @@ async function run(): Promise<void> {
       } else {
         core.info(`These files are prohibited: ${restrictedFiles.join(', ')}`)
       }
-      core.setOutput('files_exists', 'false')
+      core.setOutput('files_exists', 'true')
     } else {
       core.info('🎉 No prohibited file types found!')
-      core.setOutput('files_exists', 'true')
+      core.setOutput('files_exists', 'false')
     }
   } catch (error) {
     core.setFailed(error.message)
