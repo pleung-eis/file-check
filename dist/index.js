@@ -93,7 +93,7 @@ function run() {
         try {
             // Get params from workflow - strings
             const files = core.getInput('files', { required: true });
-	    const commitFiles = core.getInput('commited_files', { required: true });
+	    const commitFiles = core.getInput('committed_files', { required: true });
             const failure = (core.getInput('throw_error') || 'true').toUpperCase() === 'TRUE';
 	    // Convert string values to lists
             const fileList = files
